@@ -7,17 +7,31 @@
         </v-expansion-panel-title>
         <v-expansion-panel-text>
           <img class="imgAvatar" :src="item.avatar_url" /><br />
-          <div class="text-h5 font-weight-bold link" >
-            adres: <a  :href="item.url" target="_blank">{{ item.url }}</a>
+          <div class="text-h5 font-weight-bold link">
+            adres: <a :href="item.url" target="_blank">{{ item.url }}</a>
           </div>
           <v-btn flat color="secondary" @click="seeAll()" class="ma-5">
             Zobacz repozytoria
           </v-btn>
           <Transition name="slide-fade">
             <ul v-if="expand" class="pa-5">
-              <li v-for="(repo, ind) in repos" :key="ind"  style="list-style-type: none;">
-                <v-icon large color="blue darken-2" class="ma-2"> mdi-arrow-right </v-icon
+              <li
+                v-for="(repo, ind) in repos"
+                :key="ind"
+                style="list-style-type: none"
+              >
+                <v-icon large color="blue darken-2" class="ma-2">
+                  mdi-arrow-right </v-icon
                 >{{ repo.name }}
+                <!-- <v-icon large color="blue darken-2" class="ma-2" style='vertical-align:top;'>mdi-star </v-icon>{{repo.stargazers_count}} -->
+                <v-btn class="ma-2" color="#d4b26a" dark>
+                  {{ repo.stargazers_count }}
+                  <v-icon dark right> mdi-star </v-icon>
+                </v-btn>
+                <v-btn class="ma-2" color="indigo" dark>
+                  {{ repo.watchers_count }}
+                  <v-icon dark right> mdi-face </v-icon>
+                </v-btn>
               </li>
             </ul>
           </Transition>
@@ -76,10 +90,14 @@ export default {
   transform: translateX(20px);
   opacity: 0;
 }
-.link{
-    a{
-         overflow-wrap: break-word; word-wrap: break-word; -ms-hyphens: auto; -moz-hyphens: auto; -webkit-hyphens: auto; hyphens: auto;
-    }
-
+.link {
+  a {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
 }
 </style>
