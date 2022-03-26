@@ -6,10 +6,10 @@
           {{ item.login }}
         </v-expansion-panel-title>
         <v-expansion-panel-text>
-          <div class="text-h5 font-weight-bold">
-            adres: <a :href="item.url" target="_blank">{{ item.url }}</a>
-          </div>
           <img class="imgAvatar" :src="item.avatar_url" /><br />
+          <div class="text-h5 font-weight-bold link" >
+            adres: <a  :href="item.url" target="_blank">{{ item.url }}</a>
+          </div>
           <v-btn flat color="secondary" @click="seeAll()" class="ma-5">
             Zobacz repozytoria
           </v-btn>
@@ -75,5 +75,11 @@ export default {
 .slide-fade-leave-to {
   transform: translateX(20px);
   opacity: 0;
+}
+.link{
+    a{
+         overflow-wrap: break-word; word-wrap: break-word; -ms-hyphens: auto; -moz-hyphens: auto; -webkit-hyphens: auto; hyphens: auto;
+    }
+
 }
 </style>
