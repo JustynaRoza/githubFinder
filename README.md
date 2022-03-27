@@ -1,4 +1,6 @@
 # githubFinder
+Stack: Vue3 + Vite + Vuetify.
+
 Require:
 Installed Node.js, added to pah.
 
