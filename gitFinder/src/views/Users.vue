@@ -1,18 +1,19 @@
 <template>
-  <div >
+  <div>
      <v-text-field
             :label="message"
             solo
             v-model="searchField"
             @input="searchUser"
           ></v-text-field>
+    <clear-button class="mb-4" @clear-list="clearUsers()" :disabled="usersList.length===0"/>
     <div class="text-center" v-if="showLoader"><loader/></div>
     <div v-else>
       <div v-if="error!=null">
         {{error}}
       </div>
       <div v-else>
-        <list-user :users="usersList"></list-user>
+        <list-user :users="usersList" :clearUsers="searchState"></list-user>
       </div>
     </div>
   </div>
@@ -22,6 +23,7 @@
 import axios from 'axios'
 import Loader from '../components/layout/Loader.vue'
 import ListUser from '../components/ListUser.vue'
+import ClearButton from '../components/layout/ClearButton.vue'
  export default{
    name:"users",
    data(){
@@ -53,11 +55,21 @@ import ListUser from '../components/ListUser.vue'
        }
       
 
+     },
+     clearUsers(){
+       this.usersList = []
+       this.searchField=""
+     }
+   },
+   computed:{
+     searchState(){
+       return this.searchField===""?"":"Brak użytkowników pasujących do wyszukiwanej frazy!"
      }
    },
    components:{
      Loader,
-     ListUser
+     ListUser,
+     ClearButton
    }
  }
 </script>
