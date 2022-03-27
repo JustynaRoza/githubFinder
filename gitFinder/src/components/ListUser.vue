@@ -6,7 +6,7 @@
           {{ item.login }}
         </v-expansion-panel-title>
         <v-expansion-panel-text>
-          <img class="imgAvatar" :src="item.avatar_url" /><br />
+          <div class="wrappImg"><img class="imgAvatar ma-2" :src="item.avatar_url" /></div>
           <div class="text-h5 font-weight-bold link mb-3">
             <a :href="item.url" target="_blank">{{ item.url }}</a>
           </div>
@@ -22,7 +22,7 @@
               >
                 <v-icon large color="blue darken-2" class="ma-2">
                   mdi-arrow-right </v-icon
-                >{{ repo.name }}
+                ><span class="font-weight-bold">{{ repo.name }}</span>
                 <v-btn class="ma-2" color="#d4b26a" dark>
                   {{ repo.stargazers_count }}
                   <v-icon dark right> mdi-star </v-icon>
@@ -80,9 +80,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.imgAvatar {
-  max-width: 120px;
+
+@media screen and (min-width: 900px) {
+  .imgAvatar {
+  max-width: 180px;
   float: right;
+}
+}
+@media screen and (max-width: 400px) {
+  .imgAvatar {
+  max-width: 140px;
+  margin: auto;
+}
+.wrappImg{
+  text-align: center;
+}
 }
 .slide-fade-enter-active {
   transition: all 0.3s ease-out;

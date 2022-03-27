@@ -1,5 +1,5 @@
 <template>
-  <v-btn color="error" plain @click="$emit('clearList')"> Wyczyść </v-btn>
+  <v-btn color="primary" plain @click="$emit('clearList')"> Wyczyść </v-btn>
 </template>
 
 <script>
