@@ -1,12 +1,18 @@
 <template>
   <ul class="sidenav">
-    <li><router-link to="/">O aplikacji</router-link></li>
-    <li><router-link to="/users">Użytkownicy</router-link></li>
+    <li><router-link to="/" :class="currentRouteName==='home'?'active':''">O aplikacji</router-link></li>
+    <li><router-link to="/users" :class="currentRouteName==='users'?'active':''">Użytkownicy</router-link></li>
   </ul>
 </template>
 
 <script>
-export default {};
+export default {
+  computed:{
+    currentRouteName() {
+      console.log(this.$route.name)
+        return this.$route.name;
+    }}
+};
 </script>
 
 <style lang='scss'>
@@ -39,13 +45,13 @@ ul.sidenav li a {
 }
 
 ul.sidenav li a.active {
-  background-color: #4caf50;
+  background-color: #555;
 
   color: white;
 }
 
 ul.sidenav li a:hover:not(.active) {
-  background-color: #555;
+  background-color: rgba(85, 85, 85, 0.61);
 
   color: white;
 }
