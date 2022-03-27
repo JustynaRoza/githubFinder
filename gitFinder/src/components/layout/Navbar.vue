@@ -2,118 +2,87 @@
   <ul class="sidenav">
     <li><router-link to="/">O aplikacji</router-link></li>
     <li><router-link to="/users">Użytkownicy</router-link></li>
-</ul>
+  </ul>
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
 <style lang='scss'>
-
 ul.sidenav {
+  list-style-type: none;
 
-list-style-type: none;
+  margin: 0;
 
-margin: 0;
+  padding: 0;
 
-padding: 0;
+  width: 25%;
 
-width: 25%;
+  background-color: #f1f1f1;
 
-background-color: #f1f1f1;
+  position: fixed;
 
-position: fixed;
+  height: 100%;
 
-height: 100%;
-
-overflow: auto;
-
+  overflow: auto;
 }
-
- 
 
 ul.sidenav li a {
+  display: block;
 
-display: block;
+  color: #000;
 
-color: #000;
+  padding: 12px 26px;
 
-padding: 12px 26px;
-
-text-decoration: none;
+  text-decoration: none;
 }
-
- 
 
 ul.sidenav li a.active {
+  background-color: #4caf50;
 
-background-color: #4CAF50;
-
-color: white;
-
+  color: white;
 }
-
- 
 
 ul.sidenav li a:hover:not(.active) {
+  background-color: #555;
 
-background-color: #555;
-
-color: white;
-
+  color: white;
 }
-
- 
 
 div.content {
+  margin-left: 25%;
 
-margin-left: 25%;
+  padding: 1px 16px;
 
-padding: 1px 16px;
-
-height: 1000px;
-
+  height: 1000px;
 }
-
- 
 
 @media screen and (max-width: 900px) {
+  ul.sidenav {
+    width: 100%;
 
-ul.sidenav {
+    height: auto;
 
-width: 100%;
+    position: relative;
+  }
 
-height: auto;
+  ul.sidenav li a {
+    float: left;
 
-position: relative;
+    padding: 15px;
+  }
 
+  div.content {
+    margin-left: 0;
+  }
 }
-
-ul.sidenav li a {
-
-float: left;
-
-padding: 15px;
-
-}
-
-div.content {margin-left: 0;}
-
-}
-
- 
 
 @media screen and (max-width: 400px) {
+  ul.sidenav li a {
+    text-align: center;
 
-ul.sidenav li a {
-
-text-align: center;
-
-float: none;
-
-}}
-
+    float: none;
+  }
+}
 </style>

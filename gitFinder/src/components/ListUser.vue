@@ -7,17 +7,35 @@
         </v-expansion-panel-title>
         <v-expansion-panel-text>
           <img class="imgAvatar" :src="item.avatar_url" /><br />
-          <div class="text-h5 font-weight-bold link" >
-            adres: <a  :href="item.url" target="_blank">{{ item.url }}</a>
+          <div class="text-h5 font-weight-bold link mb-3">
+            <a :href="item.url" target="_blank">{{ item.url }}</a>
           </div>
-          <v-btn flat color="secondary" @click="seeAll()" class="ma-5">
+          <v-btn flat color="secondary" @click="seeAll()" class="ma-1">
             Zobacz repozytoria
           </v-btn>
           <Transition name="slide-fade">
             <ul v-if="expand" class="pa-5">
-              <li v-for="(repo, ind) in repos" :key="ind"  style="list-style-type: none;">
-                <v-icon large color="blue darken-2" class="ma-2"> mdi-arrow-right </v-icon
+              <li
+                v-for="(repo, ind) in repos"
+                :key="ind"
+                style="list-style-type: none"
+              >
+                <v-icon large color="blue darken-2" class="ma-2">
+                  mdi-arrow-right </v-icon
                 >{{ repo.name }}
+                <v-btn class="ma-2" color="#d4b26a" dark>
+                  {{ repo.stargazers_count }}
+                  <v-icon dark right> mdi-star </v-icon>
+                </v-btn>
+                <v-btn class="ma-2" color="indigo" dark>
+                  {{ repo.watchers_count }}
+                  <v-icon dark right> mdi-face </v-icon>
+                </v-btn>
+                <v-btn class="ma-2" color="indigo" dark>
+                  {{ typePrivacy(repo.private) }}
+                  <v-icon dark right v-if="repo.private"> mdi-lock </v-icon>
+                  <v-icon dark right v-else> mdi-lock-open </v-icon>
+                </v-btn>
               </li>
             </ul>
           </Transition>
@@ -25,14 +43,14 @@
       </v-expansion-panel>
     </v-expansion-panels>
   </div>
-  <div v-else>Brak użytkowników pasujących do wyszukiwanej frazy!</div>
+  <div v-else>{{ clearUsers }}</div>
 </template>
 
 <script>
 import axios from "axios";
 export default {
   name: "users",
-  props: ["users"],
+  props: ["users", "clearUsers"],
   data() {
     return {
       repos: [],
@@ -44,7 +62,7 @@ export default {
       this.expand = false;
       try {
         const response = await axios.get(
-          `https://api.github.com/users/${login}/repos?per_page=5&sort=create`
+          `https://api.github.com/users/${login}/repos?sort=create`
         );
         this.repos = response.data;
       } catch (err) {
@@ -52,7 +70,10 @@ export default {
       }
     },
     seeAll() {
-      this.expand = true;
+      this.expand = !this.expand;
+    },
+    typePrivacy(flag) {
+      return flag ? "Prywatne" : "Publiczne";
     },
   },
 };
@@ -60,7 +81,7 @@ export default {
 
 <style lang="scss" scoped>
 .imgAvatar {
-  max-width: 100px;
+  max-width: 120px;
   float: right;
 }
 .slide-fade-enter-active {
@@ -76,10 +97,18 @@ export default {
   transform: translateX(20px);
   opacity: 0;
 }
-.link{
-    a{
-         overflow-wrap: break-word; word-wrap: break-word; -ms-hyphens: auto; -moz-hyphens: auto; -webkit-hyphens: auto; hyphens: auto;
-    }
-
+.link {
+  a {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    color: rgba(0, 0, 0, 0.671);
+  }
+  a:hover {
+    color: black;
+  }
 }
 </style>
