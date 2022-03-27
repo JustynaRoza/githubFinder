@@ -14,7 +14,8 @@
     <div class="text-center" v-if="showLoader"><loader /></div>
     <div v-else>
       <div v-if="error != null">
-        {{ error }}
+        <!-- {{ error }} -->
+        <v-alert v-if="searchFieldLen" type="error">{{ error }}</v-alert>
       </div>
       <div v-else>
         <list-user :users="usersList" :clearUsers="searchState"></list-user>
@@ -42,7 +43,7 @@ export default {
   methods: {
     searchUser() {
       this.searchField.split("").length > 2
-        ? setTimeout(this.searchApi(), 1000)
+        ? this.searchApi()
         : (this.message = "Wpisz co najmniej 3 znaki");
     },
     async searchApi() {
@@ -72,6 +73,9 @@ export default {
         ? ""
         : "Brak użytkowników pasujących do wyszukiwanej frazy!";
     },
+    searchFieldLen(){
+      return this.searchField.split('').length>2
+    }
   },
   components: {
     Loader,
