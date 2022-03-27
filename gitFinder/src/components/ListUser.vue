@@ -32,7 +32,7 @@
                   <v-icon dark right> mdi-face </v-icon>
                 </v-btn>
                 <v-btn class="ma-2" color="indigo" dark>
-                  {{typePrivacy(repo.private)}}
+                  {{ typePrivacy(repo.private) }}
                   <v-icon dark right v-if="repo.private"> mdi-lock </v-icon>
                   <v-icon dark right v-else> mdi-lock-open </v-icon>
                 </v-btn>
@@ -43,7 +43,7 @@
       </v-expansion-panel>
     </v-expansion-panels>
   </div>
-  <div v-else>{{clearUsers}}</div>
+  <div v-else>{{ clearUsers }}</div>
 </template>
 
 <script>
@@ -72,9 +72,9 @@ export default {
     seeAll() {
       this.expand = !this.expand;
     },
-    typePrivacy(flag){
-      return flag?"Prywatne":"Publiczne"
-    }
+    typePrivacy(flag) {
+      return flag ? "Prywatne" : "Publiczne";
+    },
   },
 };
 </script>
@@ -107,7 +107,7 @@ export default {
     hyphens: auto;
     color: rgba(0, 0, 0, 0.671);
   }
-  a:hover{
+  a:hover {
     color: black;
   }
 }
